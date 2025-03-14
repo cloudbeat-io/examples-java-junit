@@ -1,12 +1,13 @@
 package com.saucedemo.pages;
 
+import java.util.List;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
-import java.util.List;
+import io.cloudbeat.common.annotation.CbStep;
 
 public class ProductsPage {
     private final WebDriver driver;
@@ -20,23 +21,28 @@ public class ProductsPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    @CbStep("Get Add To Cart Buttons")
     public List<WebElement> getAddToCartButtons() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(addToCartButtons));
     }
 
+    @CbStep("Get Remove Buttons")
     public List<WebElement> getRemoveButtons() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(removeButtons));
     }
 
+    @CbStep("Get Prices")
     public List<WebElement> getPriceBars() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(priceBars));
     }
 
+    @CbStep("Assert Products Count")
     public void assertProductsCount(int expectedCount) {
         int actualCount = getAddToCartButtons().size();
         assert actualCount == expectedCount : "Expected " + expectedCount + " products, but found " + actualCount;
     }
 
+    @CbStep("Assert Price")
     public void assertPriceBarButtonText(int priceBarIndex, String expectedText) {
         WebElement priceBar = getPriceBars().get(priceBarIndex);
         WebElement button = priceBar.findElement(By.tagName("button"));
@@ -44,10 +50,12 @@ public class ProductsPage {
         assert button.getText().equals(expectedText) : "Expected button text: " + expectedText + ", but got: " + button.getText();
     }
 
+    @CbStep("Add To Cart")
     public void clickAddToCartButton(int buttonIndex) {
         getAddToCartButtons().get(buttonIndex).click();
     }
 
+    @CbStep("Remove Items")
     public void clickRemoveButton(int buttonIndex) {
         getRemoveButtons().get(buttonIndex).click();
     }
