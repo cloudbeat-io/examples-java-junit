@@ -2,6 +2,8 @@
 
 A Selenium Java JUnit 5 project for testing the Sauce Demo website with Cloudbeat reporting
 
+![Cloudbeat Results](https://github.com/cloudbeat-io/examples-java-junit/blob/main/preview/cloudbeat-results.jpg?raw=true)
+
 ## Prerequisites
 - Java 11+
 - Maven 3.6+
