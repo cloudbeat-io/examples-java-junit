@@ -5,11 +5,13 @@ import com.saucedemo.pages.ProductsPage;
 import com.saucedemo.utils.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import io.cloudbeat.junit.CbJunitExtension;
 
-// @ExtendWith({CbJunitExtension.class}) 
+@ExtendWith({CbJunitExtension.class}) 
 public class ProductsTest {
     private WebDriver driver;
     private LoginPage loginPage;
@@ -23,7 +25,7 @@ public class ProductsTest {
     }
 
     @Test
-    // @DisplayName("Add And Remove Products From Cart")
+    @DisplayName("Add And Remove Products From Cart")
     public void addAndRemoveProductsFromCart() {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();

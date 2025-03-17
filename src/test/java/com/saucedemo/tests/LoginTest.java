@@ -4,11 +4,13 @@ import com.saucedemo.pages.LoginPage;
 import com.saucedemo.utils.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import io.cloudbeat.junit.CbJunitExtension;
 
-// @ExtendWith({CbJunitExtension.class})
+@ExtendWith({ CbJunitExtension.class })
 public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
@@ -20,7 +22,7 @@ public class LoginTest {
     }
 
     @Test
-    // @Displayname("Standard User Login Behaviour")
+    @DisplayName("Standard User Login Behaviour")
     public void standardUserLoginBehaviour() {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();
@@ -36,7 +38,7 @@ public class LoginTest {
     }
 
     @Test
-    // @Displayname("Locked Out User Login Behaviour")
+    @DisplayName("Locked Out User Login Behaviour")
     public void lockedOutUserLoginBehaviour() {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();
@@ -52,7 +54,7 @@ public class LoginTest {
     }
 
     @Test
-    // @Displayname("Invalid User Login Behaviour")
+    @DisplayName("Invalid User Login Behaviour")
     public void invalidUserLoginBehaviour() {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();

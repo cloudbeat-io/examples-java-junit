@@ -32,7 +32,7 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
     }
 
-    @CbStep("Enter Username")
+    @CbStep("Enter Username: {username}")
     public void enterUsername(String username) {
         WebElement usernameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
         usernameElement.click();

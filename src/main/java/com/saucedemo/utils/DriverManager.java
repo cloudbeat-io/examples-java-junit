@@ -1,10 +1,11 @@
 package com.saucedemo.utils;
 
+import io.cloudbeat.junit.CbJunitExtension;
+import io.cloudbeat.selenium.CbWebDriverListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-// import io.cloudbeat.selenium.CbWebDriverListener;
-// import io.cloudbeat.junit.CbJunitExtension;
+import org.openqa.selenium.support.events.EventFiringDecorator;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -15,10 +16,13 @@ public class DriverManager {
             WebDriverManager.chromedriver().clearDriverCache().clearResolutionCache().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            // CbJunitExtension.endLastStep();
 
-            // CbWebDriverListener listener = CbJunitExtension.getWebDriverListener(driver);
-            // WebDriver chromeDriver = new EventFiringDecorator(listener).decorate(driver);
+            // ChromeDriver chromeDriver = new ChromeDriver();
+            // chromeDriver.manage().window().maximize();
+            // CbJunitExtension.endLastStep();
+            // WebDriverListener listener = CbJunitExtension.wrapWebDriver(chromeDriver);
+            // CbWebDriverListener listener = CbJunitExtension.getWebDriverListener(chromeDriver);
+            // driver = new EventFiringDecorator(listener).decorate(chromeDriver);
         }
         return driver;
     }
