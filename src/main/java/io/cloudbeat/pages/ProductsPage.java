@@ -1,4 +1,4 @@
-package com.saucedemo.pages;
+package io.cloudbeat.pages;
 
 import java.util.List;
 import java.time.Duration;

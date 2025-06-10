@@ -1,15 +1,13 @@
-package com.saucedemo.tests;
+package io.cloudbeat.tests;
 
-import com.saucedemo.pages.LoginPage;
-import com.saucedemo.utils.DriverManager;
+import io.cloudbeat.pages.LoginPage;
+import io.cloudbeat.utils.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-
-import io.cloudbeat.common.annotation.CbStep;
 import io.cloudbeat.junit.CbJunitExtension;
 
 @ExtendWith({ CbJunitExtension.class })
@@ -17,7 +15,6 @@ public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
 
-    @CbStep
     @BeforeEach
     public void setUp() {
         driver = DriverManager.getDriver();
@@ -59,20 +56,19 @@ public class LoginTest {
     @Test
     @DisplayName("Invalid User Login Behaviour")
     public void invalidUserLoginBehaviour() {
-        CbJunitExtension.startStep("Open Main Page");
-        loginPage.open();
-        loginPage.assertPageOpen();
-        CbJunitExtension.endLastStep();
+        CbJunitExtension.step("Open Main Page", () -> {
+            loginPage.open();
+            loginPage.assertPageOpen();
+        });
 
-        CbJunitExtension.startStep("Login With Invalid User");
-        loginPage.enterUsername("invalid_user");
-        loginPage.enterPassword("invalid_password");
-        loginPage.pressLoginButton();
-        loginPage.assertLoginErrorMessage("Epic sadface: Username and password do not match any user in this service");
-        CbJunitExtension.endLastStep();
+        CbJunitExtension.step("Login With Invalid User", () -> {
+            loginPage.enterUsername("invalid_user");
+            loginPage.enterPassword("invalid_password");
+            loginPage.pressLoginButton();
+            loginPage.assertLoginErrorMessage("Epic sadface: Username and password do not match any user in this service");
+        });
     }
 
-    @CbStep
     @AfterEach
     public void tearDown() {
         CbJunitExtension.startStep("Close Browser");

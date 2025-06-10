@@ -15,14 +15,13 @@ A Selenium Java JUnit 5 project for testing the Sauce Demo website with Cloudbea
 3. Run all tests with `mvn test` or run a specific test class `mvn test -Dtest=ProductsTest`
 
 ## Implementing CloudBeat Reporting
-1.1. Import CloudBeat step extension in your pages
+1.1. Import CloudBeat step annotation in your pages
 
 ```java
 import io.cloudbeat.common.annotation.CbStep;
-
 ```
 
-1.2. Add CbStep above your method
+1.2. Add `@CbStep` above your method
 ```java
 @CbStep("Open Base URL")
 public void open() {
@@ -54,7 +53,7 @@ public class LoginTest {
 }
 ```
 
-2.3. Wrap your test steps using startStep & endLastStep:
+2.3. Wrap your test logic using startStep & endLastStep:
 
 ```java
     @Test
@@ -70,14 +69,15 @@ public class LoginTest {
 2.4. Or use an anonymous method:
 
 ```java
-    import io.cloudbeat.junit.CbJunitExtension;
-
-    CbJunitExtension.step("Method Name", () => {
-        // code
-    });
+    public void standardUserLoginBehaviour() {
+        CbJunitExtension.step("Method Name", () -> {
+            loginPage.open();
+            loginPage.assertPageOpen();
+        });
+    }
 ```
 
-2.5 Attach Screenshot:
+2.5 `attachScreenshot` can be used to manually attach a screenshot:
 
 ```java
     CbJunitExtension.attachScreenshot(screenshotData, true);

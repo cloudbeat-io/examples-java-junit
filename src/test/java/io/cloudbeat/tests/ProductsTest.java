@@ -1,15 +1,11 @@
-package com.saucedemo.tests;
+package io.cloudbeat.tests;
 
-import com.saucedemo.pages.LoginPage;
-import com.saucedemo.pages.ProductsPage;
-import com.saucedemo.utils.DriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.cloudbeat.pages.LoginPage;
+import io.cloudbeat.pages.ProductsPage;
+import io.cloudbeat.utils.DriverManager;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import io.cloudbeat.common.annotation.CbStep;
 import io.cloudbeat.junit.CbJunitExtension;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,7 +43,6 @@ public class ProductsTest {
         });
     }
 
-    @CbStep
     @BeforeEach
     public void setUp() {
         driver = DriverManager.getDriver();
@@ -57,6 +52,8 @@ public class ProductsTest {
 
     @Test
     @DisplayName("Add And Remove Products From Cart")
+    @Tag("Sanity")
+    @Tag("General")
     public void addAndRemoveProductsFromCart() {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();
@@ -81,7 +78,16 @@ public class ProductsTest {
         takeScreenshot("Add to cart");
     }
 
-    @CbStep
+    @Test
+    @Disabled("This test is disabled")
+    @DisplayName("A test that shouldn't be executed")
+    public void IgnoreMe() {
+        CbJunitExtension.startStep("Open Main Page");
+        loginPage.open();
+        loginPage.assertPageOpen();
+        CbJunitExtension.endLastStep();
+    }
+
     @AfterEach
     public void tearDown() {
         CbJunitExtension.startStep("Close Browser");
