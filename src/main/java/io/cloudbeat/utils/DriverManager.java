@@ -10,7 +10,6 @@ public class DriverManager {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            // CbJunitExtension.startStep("Initialize Browser");
             WebDriverManager.chromedriver().clearDriverCache().clearResolutionCache().setup();
             var chromeDriver = new ChromeDriver();
             chromeDriver.manage().window().maximize();

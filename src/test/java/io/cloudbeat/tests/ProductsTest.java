@@ -15,9 +15,7 @@ import java.io.IOException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-@ExtendWith({CbJunitExtension.class}) 
-public class ProductsTest {
-    private WebDriver driver;
+public class ProductsTest extends BaseTest {
     private LoginPage loginPage;
     private ProductsPage productsPage;
 
@@ -45,7 +43,6 @@ public class ProductsTest {
 
     @BeforeEach
     public void setUp() {
-        driver = DriverManager.getDriver();
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
     }
@@ -85,13 +82,6 @@ public class ProductsTest {
         CbJunitExtension.startStep("Open Main Page");
         loginPage.open();
         loginPage.assertPageOpen();
-        CbJunitExtension.endLastStep();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        CbJunitExtension.startStep("Close Browser");
-        DriverManager.quitDriver();
         CbJunitExtension.endLastStep();
     }
 }

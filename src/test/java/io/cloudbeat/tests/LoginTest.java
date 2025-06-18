@@ -10,37 +10,30 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import io.cloudbeat.junit.CbJunitExtension;
 
-@ExtendWith({ CbJunitExtension.class })
-public class LoginTest {
-    private WebDriver driver;
+public class LoginTest extends BaseTest {
     private LoginPage loginPage;
 
     @BeforeEach
     public void setUp() {
-        driver = DriverManager.getDriver();
         loginPage = new LoginPage(driver);
     }
 
     @Test
     @DisplayName("Standard User Login Behaviour")
     public void standardUserLoginBehaviour() {
-        CbJunitExtension.startStep("Open Main Page");
         loginPage.open();
         loginPage.assertPageOpen();
-        CbJunitExtension.endLastStep();
 
-        CbJunitExtension.startStep("Login");
         loginPage.enterUsername("standard_user");
         loginPage.enterPassword("secret_sauce");
         loginPage.pressLoginButton();
         loginPage.assertLoginSuccess();
-        CbJunitExtension.endLastStep();
     }
 
     @Test
     @DisplayName("Locked Out User Login Behaviour")
     public void lockedOutUserLoginBehaviour() {
-        CbJunitExtension.startStep("Open Main Page");
+        CbJunitExtension.startStep("Open and Verify the Main Page");
         loginPage.open();
         loginPage.assertPageOpen();
         CbJunitExtension.endLastStep();
@@ -67,12 +60,5 @@ public class LoginTest {
             loginPage.pressLoginButton();
             loginPage.assertLoginErrorMessage("Epic sadface: Username and password do not match any user in this service");
         });
-    }
-
-    @AfterEach
-    public void tearDown() {
-        CbJunitExtension.startStep("Close Browser");
-        DriverManager.quitDriver();
-        CbJunitExtension.endLastStep();
     }
 }
